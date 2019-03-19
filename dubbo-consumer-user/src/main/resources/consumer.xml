@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!--1、应用名-->
+    <dubbo:application name="dubbo-consumer-user"/>
+    <!--2、指定注册中心地址-->
+    <dubbo:registry address="zookeeper://192.168.159.130:2181"/>
+    <!--3、声明我们需要远程调用哪个接口-->
+    <dubbo:reference interface="com.atguigu.dubbo.service.MovieService" id="movieService" />
+
+
+    <bean id="userService" class="com.atguigu.dubbo.service.impl.UserServiceImpl">
+        <property name="movieService" ref="movieService"/>
+    </bean>
+
+
+
+
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+
+    <!--暴露服务-->
+    <!--1、当前应用的名字-->
+    <dubbo:application name="dubbo-provider-movie"/>
+    <!--2、指定注册中心在哪里-->
+    <dubbo:registry  address="zookeeper://192.168.159.130:2181"/>
+    <!--3、指定别人跟我远程通信使用的协议和端口号-->
+    <dubbo:protocol  name="dubbo"  port="20880"/>
+    <!--4、声明需要暴露的服务（需要被远程调用的）-->
+    <dubbo:service interface="com.atguigu.dubbo.service.MovieService" ref="movieService" version="1.0"/>
+    <!--5、将实现放入容器中-->
+    <bean id="movieService" class="com.atguigu.dubbo.service.impl.MovieServiceImpl"/>
+
+
+
+
+</beans>
